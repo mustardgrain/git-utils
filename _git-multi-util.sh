@@ -1,11 +1,17 @@
 #!/bin/bash
 
-if [ "$LOCAL_DEV_DIR" = "" ] ; then
-  echo "Please set the LOCAL_DEV_DIR environment variable"
-  exit 1
-fi
+LOCAL_DEV_DIR=$HOME/.mustardgrain/dev
 
 function __git_init_parent_dirs() {
+  if [ ! -d "$LOCAL_DEV_DIR" ] ; then
+    echo "Please symlink $LOCAL_DEV_DIR to your local development directory root"
+    exit 1
+  fi
+
+  cd $LOCAL_DEV_DIR
+  LOCAL_DEV_DIR=`pwd -P`
+  cd $LOCAL_DEV_DIR
+
   orig_pwd=`pwd`
   git_parent_dirs=()
 
