@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$LOCAL_DEV_DIR" = "" ] ; then
+  echo "Please set the LOCAL_DEV_DIR environment variable"
+  exit 1
+fi
+
 function __git_init_parent_dirs() {
   orig_pwd=`pwd`
   git_parent_dirs=()
