@@ -8,11 +8,12 @@ function __git_init_parent_dirs() {
     exit 1
   fi
 
+  orig_pwd=`pwd`
+
   cd $LOCAL_DEV_DIR
   LOCAL_DEV_DIR=`pwd -P`
   cd $LOCAL_DEV_DIR
 
-  orig_pwd=`pwd`
   git_parent_dirs=()
 
   while read -r dotgit_dir ; do
