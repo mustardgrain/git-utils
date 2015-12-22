@@ -1,7 +1,5 @@
 #!/bin/bash
 
-LOCAL_DEV_DIR=$HOME/.mustardgrain/dev
-
 function __git_init_parent_dirs() {
   if [ ! -d "$LOCAL_DEV_DIR" ] ; then
     echo "Please symlink $LOCAL_DEV_DIR to your local development directory root"
