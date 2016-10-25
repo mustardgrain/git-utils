@@ -25,8 +25,6 @@ function check_dir() {
   done
 }
 
-check_dir "$LOCAL_DEV_DIR" 2
-
-if [ "$GOPATH" != "" ] ; then
-  check_dir "$GOPATH/src" 3
-fi
+for dir in $(echo $GIT_UTILS_PATH | tr ":" "\n") ; do
+  check_dir "$dir" 1
+done

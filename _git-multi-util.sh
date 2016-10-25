@@ -1,23 +1,25 @@
 #!/bin/bash
 
+if [ "$GIT_UTILS_PATH" = "" ] ; then
+  echo "Please set GIT_UTILS_PATH environment variable to include directories to check"
+  exit 1
+fi
+
 function __git_init_parent_dirs() {
-  if [ ! -d "$LOCAL_DEV_DIR" ] ; then
-    echo "Please symlink $LOCAL_DEV_DIR to your local development directory root"
-    exit 1
-  fi
-
-  orig_pwd=`pwd`
-
-  cd $LOCAL_DEV_DIR
-  LOCAL_DEV_DIR=`pwd -P`
-  cd $LOCAL_DEV_DIR
-
+  local orig_pwd=`pwd`
   git_parent_dirs=()
 
-  while read -r dotgit_dir ; do
-    cd "$dotgit_dir/.."
-    git_parent_dirs+=(`pwd`)
-  done < <(find $LOCAL_DEV_DIR -name .git -type d | sort)
+  for dir in $(echo $GIT_UTILS_PATH | tr ":" "\n") ; do
+    cd "$orig_pwd"
+    cd "$dir"
+    dir=`pwd -P`
+    cd "$dir"
+
+    while read -r dotgit_dir ; do
+      cd "$dotgit_dir/.."
+      git_parent_dirs+=(`pwd`)
+    done < <(find $dir -name .git -type d | sort)
+  done
 
   cd "$orig_pwd"
 }
