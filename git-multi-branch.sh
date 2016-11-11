@@ -9,10 +9,10 @@ for project_dir in "${git_parent_dirs[@]}" ; do
 
   master_branch="`git remote show origin | grep "HEAD branch" | awk '{print $3}'`"
   current_branch="`git status | grep "On branch" | awk '{print $3}'`"
-  extra_branches=`git branch -a | grep -v $master_branch | wc -l`
+  extra_branches=`git branch | grep -v $master_branch | wc -l`
 
   if [ "$master_branch" != "$current_branch" -o $extra_branches -gt 0 ]; then
     `which echo` "$project_dir:"
-    `which echo` "`git branch -a -vv`"
+    `which echo` "`git branch`"
   fi
 done
