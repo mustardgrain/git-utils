@@ -82,7 +82,7 @@ function __git_init_parent_dirs() {
               echo "GIT_UTILS_DEBUG - Testing SSH access for $repo_url"
             fi
 
-            ssh $repo_url > /dev/null 2>&1
+            ssh -o ConnectTimeout=2 $repo_url > /dev/null 2>&1
 
             if [ $? -eq 255 ] ; then
               is_reachable=0
