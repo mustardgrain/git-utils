@@ -1,5 +1,6 @@
 # git-utils
-Simple git utilities
+
+Simple git utilities that operate over many repos.
 
 ### Setup
 
