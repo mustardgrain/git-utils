@@ -20,7 +20,7 @@ function __git_init_parent_dirs() {
     dir=`pwd -P`
     cd "$dir"
 
-    for dotgit_dir in $(find $dir -name .git -type d -depth 3 | sort) ; do
+    for dotgit_dir in $(find $dir -name .git -type d | sort) ; do
       cd "$dotgit_dir/.."
 
       if [ $check_connectivity -eq 1 ] ; then
